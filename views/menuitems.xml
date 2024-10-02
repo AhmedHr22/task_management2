@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="task_management_menuitem" name="task_module">
+            <menuitem id="task_view_menu" name="Task" action="task_action_view"/>
+            <menuitem id="category_view_menu" name="Category" action="category_action_view"/>
+        </menuitem>
+    </data>
+</odoo>

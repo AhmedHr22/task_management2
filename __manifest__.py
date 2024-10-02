@@ -11,5 +11,5 @@
         'views/menuitems.xml',
         'data/category.managements.csv',
     ],
-    "depends":["base"]
+    "depends":["base"]    
 }

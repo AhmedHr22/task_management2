@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="task_form_view" model="ir.ui.view">
+            <field name="name">task form</field>
+            <field name="model">task.managements</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button class="oe btn-primary" type="object" name="start" string="commencer" attrs="{'invisible':[('state','!=','broullion')]}"/>
+                        <button class ="oe btn-secondary" type="object" name="in_draft" string="Remmetre au broullion" attrs />
+                        <button class="oe btn-success" type="object" name="conclude" string="Terminer"/>
+                        <field name="state" widget='statusbar'/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="title"/>
+                                <field name="due_date"/>
+                            </group>
+                            
+                            <group>
+                                <field name="delay"/>
+                                <field name="priority"/>
+                                <field name="category_id"/>
+                            </group>
+
+                        </group>
+                        <group>
+                            <field name="patern"/> 
+                            <field name="description"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+        <record id="task_tree_view" model="ir.ui.view">
+            <field name="name">task tree</field>
+            <field name="model">task.managements</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="title"/>
+                    <field name="due_date"/>
+                    <field name="delay"/>
+                    <field name="priority"/>
+                    <field name="state"/>
+                    <field name="description"/>
+                    <field name="patern"/>
+                </tree>
+            </field>
+        </record>
+    
+        <record id="task_action_view" model="ir.actions.act_window">
+            <field name="name">task action</field>
+            <field name="res_model">task.managements</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+    
+</odoo>

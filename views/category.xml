@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="category_form_view" model="ir.ui.view">
+            <field name="name">category form</field>
+            <field name="model">category.managements</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="titled"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field> 
+        </record>
+
+        <record id="category_tree_view" model="ir.ui.view">
+            <field name="name">category tree</field>
+            <field name="model">category.managements</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="titled" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="category_action_view" model="ir.actions.act_window">
+            <field name="name">category action</field>
+            <field name="res_model">category.managements</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
