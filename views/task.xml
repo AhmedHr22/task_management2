@@ -7,28 +7,31 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button class="oe btn-primary" type="object" name="start" string="commencer" attrs="{'invisible':[('state','!=','broullion')]}"/>
-                        <button class ="oe btn-secondary" type="object" name="in_draft" string="Remmetre au broullion" attrs />
-                        <button class="oe btn-success" type="object" name="conclude" string="Terminer"/>
+                        <button class="oe btn-primary" type="object" name="start" string="commencer" 
+                            attrs="{'invisible':[('state','!=','broullion')]}"/>
+                        <button class ="oe btn-secondary" type="object" name="in_draft" string="Remmetre au broullion" 
+                            attrs="{'invisible':[('state','!=','en_cour')]}" />
+                        <button class="oe btn-success" type="object" name="conclude" string="Terminer" 
+                            attrs="{'invisible':[('state','!=','en_cour')]}"/>
                         <field name="state" widget='statusbar'/>
                     </header>
                     <sheet>
                         <group>
                             <group>
-                                <field name="title"/>
-                                <field name="due_date"/>
+                                <field name="title" attrs="{'readonly':['|',('state','=','en_cour'),('state','=','terminer')]}"/>
+                                <field name="due_date" attrs="{'readonly':['|',('state','=','en_cour'),('state','=','terminer')]}"/>
                             </group>
                             
                             <group>
-                                <field name="delay"/>
-                                <field name="priority"/>
-                                <field name="category_id"/>
+                                <field name="delay" attrs="{'readonly':[('state','=','terminer')]}"/>
+                                <field name="priority" attrs="{'readonly':[('state','=','terminer')]}"/>
+                                <field name="category_id" attrs="{'readonly':[('state','=','terminer')]}"/>
                             </group>
 
                         </group>
                         <group>
-                            <field name="patern"/> 
-                            <field name="description"/>
+                            <field name="patern" attrs="{'readonly':[('state','=','terminer')]}"/> 
+                            <field name="description" attrs="{'readonly':[('state','=','terminer')]}"/>
                         </group>
 
                     </sheet>
