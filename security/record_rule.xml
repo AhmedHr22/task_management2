@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="task_user_record_rule" model="ir.rule">
+        <field name="name">task user record rule</field>
+        <field name="model_id" ref="task_management_2.model_task_managements"/>
+        <field name="groups" eval="[(4,ref('task_management_2.task_user_group'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id),('user_id','!=','base.user_admin')]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="task_manager_record_rule" model="ir.rule">
+        <field name="name">task manager record rule</field>
+        <field name="model_id" ref="task_management_2.model_task_managements"/>
+        <field name="groups" eval="[(4,ref('task_management_2.task_manager_group'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+</odoo>
