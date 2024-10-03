@@ -6,6 +6,9 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <div class="oe_button_box">
+                            <button type="object" name="action_open_tasks_by_category" string="Taches" /> 
+                        </div>
                         <group>
                             <field name="titled"/>
                         </group>
@@ -26,7 +29,7 @@
 
 
         <record id="category_action_view" model="ir.actions.act_window">
-            <field name="name">category action</field>
+            <field name="name">Categorie</field>
             <field name="res_model">category.managements</field>
             <field name="view_mode">tree,form</field>
         </record>

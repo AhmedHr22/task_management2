@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_view_user_tasks" model="ir.actions.act_window">
+            <field name="name">Taches</field>
+            <field name="res_model">task.managements</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_user-id':active_id}</field>
+            <field name="domain">[('user_id','=',active_id)]</field>
+        </record>
+        
+        <record id="button_view_user_tasks" model="ir.ui.view">
+            <field name="name">task user</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_show_rules']" position="after">
+                    <button name="%(action_view_user_tasks)d" type="action" string="Taches" icon="fa-tasks"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

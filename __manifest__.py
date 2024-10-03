@@ -6,6 +6,7 @@
     "license":"LGPL-3",
     "data":[
         'security/ir.model.access.csv',
+        'views/user.xml',
         'views/category.xml',
         'views/task.xml',
         'views/menuitems.xml',

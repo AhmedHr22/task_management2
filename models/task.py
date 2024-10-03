@@ -19,7 +19,7 @@ class Task(models.Model):
          default="basse",
          required=True,
          string="Priorite")
-    patern = fields.Char(required=True,string='Motif')
+    patern = fields.Char(string='Motif')
     state = fields.Selection(
         [('broullion','Broullion'),
          ('en_cour','En cours'),
@@ -55,8 +55,14 @@ class Task(models.Model):
     @api.depends('due_date')
     def compute_delay(self):
             for rec in self:
-                rec.delay = datetime.today().date() > rec.due_date
+                if rec.due_date:
+                    rec.delay = datetime.today().date() > rec.due_date
+                else:
+                    rec.delay = False
 
+    user_id = fields.Many2one('res.users',string="Utilisateur",default=lambda self:self.env.user)
+
+    
 
 
 

@@ -25,12 +25,12 @@
                             <group>
                                 <field name="delay" attrs="{'readonly':[('state','=','terminer')]}"/>
                                 <field name="priority" attrs="{'readonly':[('state','=','terminer')]}"/>
-                                <field name="category_id" attrs="{'readonly':[('state','=','terminer')]}"/>
+                                <field name="patern" attrs="{'readonly':[('state','=','terminer')],'invisible':[('priority','!=','haute')],'required':[('priority','=','haute')]}"/> 
                             </group>
-
+                            
                         </group>
                         <group>
-                            <field name="patern" attrs="{'readonly':[('state','=','terminer')]}"/> 
+                            <field name="category_id" attrs="{'readonly':[('state','=','terminer')]}"/>
                             <field name="description" attrs="{'readonly':[('state','=','terminer')]}"/>
                         </group>
 
@@ -44,6 +44,7 @@
             <field name="model">task.managements</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="user_id"/>
                     <field name="title"/>
                     <field name="due_date"/>
                     <field name="delay"/>
@@ -56,7 +57,7 @@
         </record>
     
         <record id="task_action_view" model="ir.actions.act_window">
-            <field name="name">task action</field>
+            <field name="name">Taches</field>
             <field name="res_model">task.managements</field>
             <field name="view_mode">tree,form</field>
         </record>

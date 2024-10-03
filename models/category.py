@@ -8,3 +8,12 @@ class Category(models.Model):
     _rec_name = 'titled'
 
     titled = fields.Char(required=True,string="titled")
+
+    def action_open_tasks_by_category(self):
+        return{
+            'name':f'Tache de categorie {self.titled}',
+            'type':'ir.actions.act_window',
+            'res_model':'task.managements',
+            'domain':[('category_id','=',self.titled)],
+            'view_mode':'tree,form'
+        }
