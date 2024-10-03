@@ -27,7 +27,6 @@
             </field>
         </record>
 
-
         <record id="category_action_view" model="ir.actions.act_window">
             <field name="name">Categorie</field>
             <field name="res_model">category.managements</field>

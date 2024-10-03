@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- task2 -->
 <odoo>
     <data>
         <record id="action_view_user_tasks" model="ir.actions.act_window">

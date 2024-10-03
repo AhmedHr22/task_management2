@@ -59,7 +59,7 @@ class Task(models.Model):
                     rec.delay = datetime.today().date() > rec.due_date
                 else:
                     rec.delay = False
-
+    # task2
     user_id = fields.Many2one('res.users',string="Utilisateur",default=lambda self:self.env.user)
 
     

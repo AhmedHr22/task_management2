@@ -9,6 +9,7 @@ class Category(models.Model):
 
     titled = fields.Char(required=True,string="titled")
 
+    # task2
     def action_open_tasks_by_category(self):
         return{
             'name':f'Tache de categorie {self.titled}',
