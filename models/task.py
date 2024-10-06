@@ -92,7 +92,9 @@ class Task(models.Model):
             raise ValidationError("la tache depandante elle doit etre terminer pour commencer la tache courante")
 
 
-    
+    # tache5
+    attachement = fields.Many2many('ir.attachment',string="Piece jointe")
+
 
 
 

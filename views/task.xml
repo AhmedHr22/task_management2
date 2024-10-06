@@ -26,11 +26,11 @@
                                 <field name="delay" attrs="{'readonly':[('state','=','terminer')]}"/>
                                 <field name="priority" attrs="{'readonly':[('state','=','terminer')]}"/>
                                 <field name="patern" attrs="{'readonly':[('state','=','terminer')],'invisible':[('priority','!=','haute')],'required':[('priority','=','haute')]}"/> 
-                            </group>
-                            
+                            </group>    
                         </group>
                         <group>
-                            <field name="is_category_travail" />
+                            <field name="attachement" attrs="{'readonly':[('state','=','terminer')]}" widget="many2many_binary"/>
+                            <field name="is_category_travail" invisible="1"/>
                             <field name="category_id" attrs="{'readonly':[('state','=','terminer')]}"/>
                             <field name="linked_task" attrs="{'invisible':[('is_category_travail','!=',True)],'readonly':[('state','=','terminer')]}"/>
                             <field name="description" attrs="{'readonly':[('state','=','terminer')]}"/>
