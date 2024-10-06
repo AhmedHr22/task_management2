@@ -30,7 +30,9 @@
                             
                         </group>
                         <group>
+                            <field name="is_category_travail" />
                             <field name="category_id" attrs="{'readonly':[('state','=','terminer')]}"/>
+                            <field name="linked_task" attrs="{'invisible':[('is_category_travail','!=',True)],'readonly':[('state','=','terminer')]}"/>
                             <field name="description" attrs="{'readonly':[('state','=','terminer')]}"/>
                         </group>
 
