@@ -56,33 +56,28 @@ class Task(models.Model):
     
     @api.depends('due_date')
     def compute_delay(self):
-            for rec in self:
-                if rec.due_date:
-                    rec.delay = datetime.today().date() > rec.due_date
-                else:
-                    rec.delay = False
+        for rec in self:
+            if rec.due_date:
+                rec.delay = datetime.today().date() > rec.due_date
+            else:
+                rec.delay = False
+    
+    
     # task2
     user_id = fields.Many2one('res.users',string="Utilisateur",default=lambda self:self.env.user)
 
+   
     # task4
     is_category_travail = fields.Boolean(default=False,compute="compute_category_id")
     @api.depends("category_id")
     def compute_category_id(self):
         category_travail = self.env.ref('task_management_2.category_record')
         for rec in self:
-            import logging
-            logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>category_id {rec.category_id} \n\n')
-            logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>category_travail {category_travail} \n\n')
-
             rec.is_category_travail = category_travail == rec.category_id
             
     linked_task = fields.Many2one('task.managements',string="Tache depandante")
     @api.constrains('linked_task')
     def check_linked_task(self):
-        import logging
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>linked_task_state {self.linked_task.state} \n\n')
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>state {self.state} \n\n')
-
         if self.linked_task.state == "terminer" and self.state == "broullion" :
             self.start()  
         elif not self.linked_task:
