@@ -4,7 +4,7 @@
         <field name="name">task user record rule</field>
         <field name="model_id" ref="task_management_2.model_task_managements"/>
         <field name="groups" eval="[(4,ref('task_management_2.task_user_group'))]"/>
-        <field name="domain_force">[('user_id', '=', user.id),('user_id','!=','base.user_admin')]</field>
+        <field name="domain_force">[('user_id','!=','base.user_admin')]</field>
         <field name="perm_read" eval="True"/>
         <field name="perm_create" eval="True"/>
         <field name="perm_write" eval="False"/>
