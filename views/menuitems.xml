@@ -4,6 +4,7 @@
         <menuitem id="task_management_menuitem" name="Task module">
             <menuitem id="task_view_menu" name="Taches" action="task_action_view"/>
             <menuitem id="category_view_menu" name="Categories" action="category_action_view"/>
+            <menuitem id="view_report_task_menu" name="Rapport des taches" action="view_report_task_action"/>
         </menuitem>
     </data>
 </odoo>

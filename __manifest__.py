@@ -6,11 +6,15 @@
     "license":"LGPL-3",
     "data":[
         'security/ir.model.access.csv',
+        'data/category.managements.csv',
         'views/user.xml',
         'views/category.xml',
         'views/task.xml',
+        'wizard/confirmation_wizard.xml',
         'views/menuitems.xml',
-        'data/category.managements.csv',
+        'report/report_task_details_template.xml',
+        'report/report_task_basic_template.xml',
+        'report/report.xml',
     ],
     "depends":["base"]    
 }

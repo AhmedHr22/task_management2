@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_task_managements,access_task_managements,model_task_managements,base.group_user,1,1,1,1
 access_category_managements,access_category_managements,model_category_managements,base.group_user,1,1,1,1
+access_task_confirmation_wizard,access_task_confirmation_wizard,model_task_confirmation_wizard,base.group_user,1,1,1,1

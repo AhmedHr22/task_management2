@@ -1,0 +1,23 @@
+
+<odoo>
+    <data>
+        <record id="report_task_basic_record" model="ir.actions.report">
+            <field name="name">basic report</field>
+            <field name="model">task.managements</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">task_management_2.report_task_basic_template</field>
+            <field name="report_file">task_management_2.report_task_basic_template</field>
+            <field name="binding_model_id" ref="task_management_2.model_task_managements"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_all_task_details" model="ir.actions.report">
+            <field name="name">detail des taches</field>
+            <field name="model">task.confirmation.wizard</field>
+            <field name="binding_model_id" ref="model_task_confirmation_wizard"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">task_management_2.report_task_details_template</field>
+            <field name="report_file">task_management_2.report_task_details_template</field>
+        </record>
+    </data>
+</odoo>

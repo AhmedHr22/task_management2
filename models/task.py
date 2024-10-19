@@ -54,6 +54,7 @@ class Task(models.Model):
             
         return super(Task,self).unlink()
     
+    
     @api.depends('due_date')
     def compute_delay(self):
         for rec in self:

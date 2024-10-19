@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <template id="report_task_details_template">
+            <t t-call="web.basic_layout">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tâche</th>
+                            <th>Catégorie</th>
+                            <th>Utilisateur</th>
+                            <th>Etat</th>
+                            <th>date d'échéance</th>
+                            <th>retard</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="docs" t-as="task">
+                        <tr>
+                           <td><t t-esc="task.id"/></td>
+                           <td><t t-esc="task.title"/></td>
+                           <td><t t-esc="task.category_id"/></td>
+                           <td><t t-esc="task.user_id"/></td>
+                           <td><t t-esc="task.state"/></td>
+                           <td><t t-esc="task.due_date"/></td>
+                           <td><t t-esc="task.delay"/></td>
+                        </tr>
+                    </t>
+                </table>
+                    
+            </t>
+        </template>
+    </data>
+</odoo>

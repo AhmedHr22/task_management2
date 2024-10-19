@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <template id="report_task_basic_template">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="variable">
+
+                    <div>
+                        <h2>accounting test on </h2>
+                    </div>
+                    <div>
+                        <span>title:</span>
+                        <t t-esc="variable.title"/>
+                    </div>
+                    <div>
+                        <span>description:</span>
+                        <t t-esc="variable.description"/>
+                    </div>
+                    <div>
+                        <span>category:</span>
+                        <t t-esc="variable.category_id.titled"/>
+                    </div>
+                    <div >
+                        <t t-if="variable.is_category_travail">
+                            <span>tache depandante:</span>
+                            <t t-esc="variable.linked_task.title"/>
+                        </t>
+                    </div>
+                    <div>
+                        <span>state:</span>
+                        <t t-esc="variable.state"/>
+                    </div>
+                    <div>
+                        <span>user:</span>
+                        <t t-esc="variable.user_id.name"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
