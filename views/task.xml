@@ -16,10 +16,16 @@
                         <field name="state" widget='statusbar'/>
                     </header>
                     <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="number_sequence"/>
+                            </h1>
+                        </div>
                         <group>
                             <group>
                                 <field name="title" attrs="{'readonly':['|',('state','=','en_cour'),('state','=','terminer')]}"/>
                                 <field name="due_date" attrs="{'readonly':['|',('state','=','en_cour'),('state','=','terminer')]}"/>
+                                <!-- <field name="number_sequence" attrs="{'readonly':['|',('state','=','en_cour'),('state','=','terminer')]}"/> -->
                             </group>
                             
                             <group>

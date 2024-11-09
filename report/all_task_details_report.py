@@ -12,6 +12,5 @@ class AllTaskDetailsReport(models.AbstractModel):
         logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>docs : {docs} \n\n')
 
         return {
-            "docs" : docs
-        
+            "docs" : docs       
         }

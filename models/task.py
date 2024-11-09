@@ -1,6 +1,7 @@
 from odoo import api,fields,models
 from odoo.exceptions import ValidationError
 from datetime import datetime
+import logging
 
 class Task(models.Model):
     _name="task.managements"
@@ -70,6 +71,7 @@ class Task(models.Model):
    
     # task4
     is_category_travail = fields.Boolean(default=False,compute="compute_category_id")
+    
     @api.depends("category_id")
     def compute_category_id(self):
         category_travail = self.env.ref('task_management_2.category_record')
@@ -77,6 +79,7 @@ class Task(models.Model):
             rec.is_category_travail = category_travail == rec.category_id
             
     linked_task = fields.Many2one('task.managements',string="Tache depandante")
+    
     @api.constrains('linked_task')
     def check_linked_task(self):
         if self.linked_task.state == "terminer" and self.state == "broullion" :
@@ -92,7 +95,41 @@ class Task(models.Model):
     attachement = fields.Many2many('ir.attachment',string="Piece jointe")
 
 
+    # tache7
+    number_sequence = fields.Char(string="Numero")
+   
+    def generate_sequence(self):
+        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
+        seq = self.env['ir.sequence'].search([('code','=','task_sequence')],limit=1)
+        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
+        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq :{seq} \n\n')
 
+        if seq:
+            return seq.next_by_code('task_sequence')
+        else:
+            vals = {
+                "name":"task",
+                "code":"task_sequence",
+                "prefix":"T",
+                "padding":8,
+                "implementation":"standard",
+            }
+            seq = self.env['ir.sequence'].create(vals)
+            logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>seq : {seq} \n\n')
+
+            return seq.next_by_code('task_sequence')
+            # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>number_sequence : {self.number_sequence} \n\n')
+
+    @api.model
+    def create(self,vals):
+        vals["number_sequence"]= self.generate_sequence()
+        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>number_sequence : {vals} \n\n')
+        
+        res = super(Task,self).create(vals)
+        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>vals : {vals} \n\n')
+        
+        return res
+    
 
 
 
