@@ -29,6 +29,8 @@ class Task(models.Model):
          default='broullion',
          required=True,
          string="State")
+    
+    
     # task4
     category_id = fields.Many2one('category.managements',string="Categorie",required=True)
     
@@ -85,7 +87,6 @@ class Task(models.Model):
         if self.linked_task.state == "terminer" and self.state == "broullion" :
             self.start()  
         elif not self.linked_task:
-            import logging
             logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>linked task_null : {self.linked_task} \n\n')
         else:    
             raise ValidationError("la tache depandante elle doit etre terminer pour commencer la tache courante")
@@ -99,18 +100,10 @@ class Task(models.Model):
     number_sequence = fields.Char(string="Numero")
    
     def generate_sequence(self):
-        # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
         current_user_id = self.env.user.id
         code_sequence = f"task_sequence{current_user_id}"
         seq = self.env['ir.sequence'].sudo().search([('code','=',code_sequence),('create_uid','=',current_user_id)],limit=1)
-        # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
-        logging.info(f"""\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>> searched seq :{seq} 
-                     \n\n self.env.user : {current_user_id}
-                     \n\n self.user_id : {self.user_id}  
-                     \n\n self.create_uid : {self.create_uid} 
-                     \n\n seq.create_uid : {seq.create_uid}
-            """)
-
+        
         if seq:
             return seq.next_by_code(code_sequence)
         else:
@@ -123,12 +116,6 @@ class Task(models.Model):
             }
             seq = self.env['ir.sequence'].sudo().create(vals)
             seq_var = seq.next_by_code(code_sequence)
-            logging.info(f"""\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>> searched seq2 :{seq} 
-                        \n\n self.env.user2 : {current_user_id}
-                        \n\n self.user_id2 : {self.user_id}  
-                        \n\n self.create_uid2 : {self.create_uid} 
-                        \n\n seq.create_uid2 : {seq.create_uid}
-                """)
 
             return seq_var
         
@@ -136,10 +123,8 @@ class Task(models.Model):
     @api.model
     def create(self,vals):
         vals["number_sequence"]= self.generate_sequence()
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>number_sequence : {vals} \n\n')
         
         res = super(Task,self).create(vals)
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>vals : {vals} \n\n')
         return res
     
 
@@ -148,4 +133,10 @@ class Task(models.Model):
 
 
 
-
+    # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
+    # logging.info(f"""\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>> searched seq2 :{seq} 
+    #             \n\n self.env.user2 : {current_user_id}
+    #             \n\n self.user_id2 : {self.user_id}  
+    #             \n\n self.create_uid2 : {self.create_uid} 
+    #             \n\n seq.create_uid2 : {seq.create_uid}
+    #     """)
