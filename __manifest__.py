@@ -5,6 +5,8 @@
     "installable":True,
     "license":"LGPL-3",
     "data":[
+        'security/groups.xml',
+        'security/record_rule.xml',
         'security/ir.model.access.csv',
         'data/category.managements.csv',
         'views/user.xml',

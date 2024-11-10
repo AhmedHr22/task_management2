@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="task_category_group" model="ir.module.category">
+        <field name="name">Groupes du module des taches </field>
+        <field name="description">Groupes taches</field>
+        <field name="sequence">10</field>
+    </record>
+    
+    <record id="task_user_group" model="res.groups">
+        <field name="name">Utilisateur : peut creer des taches et voir seulement ses taches</field>
+        <field name="category_id" ref="task_category_group"/>
+    </record>
+
+    <record id="task_manager_group" model="res.groups">
+        <field name="name">Manger: peut creer des taches et peut consulter tous les taches et les modifier</field>
+        <field name="category_id" ref="task_category_group"/>
+        <field name="implied_ids" eval="[(4,ref('task_user_group'))]"/>
+    </record>
+</odoo>
