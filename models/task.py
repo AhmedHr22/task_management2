@@ -91,11 +91,11 @@ class Task(models.Model):
             raise ValidationError("la tache depandante elle doit etre terminer pour commencer la tache courante")
 
 
-    # tache5
+    # task5
     attachement = fields.Many2many('ir.attachment',string="Piece jointe")
 
 
-    # tache7
+    # task7
     number_sequence = fields.Char(string="Numero")
    
     def generate_sequence(self):
