@@ -99,26 +99,39 @@ class Task(models.Model):
     number_sequence = fields.Char(string="Numero")
    
     def generate_sequence(self):
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
-        seq = self.env['ir.sequence'].search([('code','=','task_sequence')],limit=1)
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
-        logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq :{seq} \n\n')
+        # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
+        current_user_id = self.env.user.id
+        code_sequence = f"task_sequence{current_user_id}"
+        seq = self.env['ir.sequence'].sudo().search([('code','=',code_sequence),('create_uid','=',current_user_id)],limit=1)
+        # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>searched seq : aaaa \n\n')
+        logging.info(f"""\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>> searched seq :{seq} 
+                     \n\n self.env.user : {current_user_id}
+                     \n\n self.user_id : {self.user_id}  
+                     \n\n self.create_uid : {self.create_uid} 
+                     \n\n seq.create_uid : {seq.create_uid}
+            """)
 
         if seq:
-            return seq.next_by_code('task_sequence')
+            return seq.next_by_code(code_sequence)
         else:
             vals = {
                 "name":"task",
-                "code":"task_sequence",
+                "code":code_sequence,
                 "prefix":"T",
                 "padding":8,
                 "implementation":"standard",
             }
-            seq = self.env['ir.sequence'].create(vals)
-            logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>seq : {seq} \n\n')
+            seq = self.env['ir.sequence'].sudo().create(vals)
+            seq_var = seq.next_by_code(code_sequence)
+            logging.info(f"""\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>> searched seq2 :{seq} 
+                        \n\n self.env.user2 : {current_user_id}
+                        \n\n self.user_id2 : {self.user_id}  
+                        \n\n self.create_uid2 : {self.create_uid} 
+                        \n\n seq.create_uid2 : {seq.create_uid}
+                """)
 
-            return seq.next_by_code('task_sequence')
-            # logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>number_sequence : {self.number_sequence} \n\n')
+            return seq_var
+        
 
     @api.model
     def create(self,vals):
@@ -127,7 +140,6 @@ class Task(models.Model):
         
         res = super(Task,self).create(vals)
         logging.info(f'\n\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> info >>>>>>>>>>>>>>>>>>>>>>vals : {vals} \n\n')
-        
         return res
     
 
